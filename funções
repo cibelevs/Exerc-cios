@@ -1,0 +1,41 @@
+//Escrever um algoritmo que leia 3 valores a,b,c. Calcule e escreve a média ponderada com pesos = 5 para números 
+//acima de 6 e peso = 2,5 para números abaixo de 6.
+#include<stdio.h>
+
+float fun_peso (float x)
+{
+    float px;
+    
+    if (x >= 6)
+        px = 5;
+    else 
+        px = 2.5;
+
+    return px;
+}
+
+
+int main()
+{
+    float a, b, c, media;
+    float pa, pb, pc;
+    
+    printf("Informe o valor de a: ");
+    scanf("%f", &a);
+ 
+    printf("Informe o valor de b: ");
+    scanf("%f", &b);
+    
+    printf("Informe o valor de c: ");
+    scanf("%f", &c);
+ 
+    pa = fun_peso(a);
+    pb = fun_peso(b);
+    pc = fun_peso(c);
+    
+    media = ((a*pa)+(b*pb)+(c*pc))/ (pa+pb+pc);
+
+    printf("Média: %f", media); 
+    
+ return 0;   
+}
