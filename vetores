@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main()
+{
+    int max = 4;
+    int v[max];
+    int maior, menor;
+    int i;
+    
+    // Leitura dos valores e inicialização de maior e menor
+    for (i = 0; i < max; i++)
+    {
+        printf("Informe o valor %d: ", i + 1);
+        scanf("%d", &v[i]);
+    }
+
+    // Inicialização de maior e menor após a leitura do primeiro valor
+    maior = v[0];
+    menor = v[0];
+
+    // Determinação do maior e menor valor
+    for (i = 1; i < max; i++)
+    {
+        if (v[i] > maior)
+        {
+            maior = v[i];
+        }
+        
+        if (v[i] < menor)
+        {
+            menor = v[i];
+        }
+    }
+    
+    printf("\nMaior valor: %d", maior);
+    printf("\nMenor valor: %d", menor);
+
+    return 0;
+}
