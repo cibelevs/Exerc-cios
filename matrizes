@@ -1,0 +1,45 @@
+#include<stdio.h>
+int main ()
+{
+    int lmax, cmax;
+   
+    
+    printf("Digite a quantidade de linhas da matriz: ");
+    scanf ("%d", &lmax);
+    
+    printf("Digite a quantidade de colunas da matriz: ");
+    scanf ("%d", &cmax); 
+    
+    int matriz[lmax][cmax];
+    int l, c;
+    int linha, coluna;
+    
+    printf ("Digite os elementos da matriz: \n");
+    
+    for (l=0; l<lmax; l++)
+    {
+        for(c=0; c<cmax; c++)
+        {
+            printf("Linha [%d][%d]: ", l, c);
+            scanf ("%d", &matriz [l][c]);             
+        }
+        printf("\n");
+    }
+    
+    printf("Escolha uma linha: ");
+    scanf("%d", &linha);
+    
+    printf("Escolha uma coluna: ");
+    scanf("%d", &coluna);
+    
+    if ( 0 < linha && linha < lmax &&  0 < coluna & coluna <cmax )
+    {
+        printf ("Número escolhido: %d", matriz [linha][coluna]);
+    }
+    else 
+    {
+        printf("Número escolhido inválido.");
+    }
+    
+    return 0;
+}
