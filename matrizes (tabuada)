@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main ()
+{
+    int matriz [10][10];
+    int l, c;
+    
+   for (l = 0; l < 10; l++)
+   {
+       printf ("Tabuda do %d: ", l + 1);
+       printf ("0  ");
+
+       for (c=0; c < 10; c++)
+       {
+           
+           matriz [l][c] = (l + 1) * (c + 1);
+           printf ("%d  ", matriz[l][c]);
+       }
+       
+       printf("\n");
+   }
+
+    return 0;
+}
