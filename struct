@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+// Definição da struct
+struct Produto {
+    char nome[50];
+    int quantidade;
+    float preco;
+};
+
+int main() {
+    struct Produto produto;
+
+    printf("Digite o nome do produto (sem espaços): ");
+    scanf("%s", produto.nome);  // Lê uma string sem espaços
+
+    printf("Digite a quantidade do produto: ");
+    scanf("%d", &produto.quantidade);
+
+    printf("Digite o preço do produto: ");
+    scanf("%f", &produto.preco);
+
+    printf("\nInformações do Produto:\n");
+    printf("Nome: %s\n", produto.nome);
+    printf("Quantidade: %d\n", produto.quantidade);
+    printf("Preço: %.2f\n", produto.preco);
+
+    return 0;
+}
