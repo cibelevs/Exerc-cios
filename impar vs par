@@ -1,0 +1,31 @@
+//Faça um algoritmo que leia 6 valores inteiros e escreva ao final a
+//quantidade de valores ímpares lidos, e a soma dos valores pares lidos
+#include<stdio.h>
+int main()
+{
+    int num, i;
+    int par, impar;
+    
+    for (i=1; i<=6; i++)
+    {
+        printf("Insira um valor %d: ", i);
+        scanf("%d", &num);
+        
+        if (num % 2 == 0)
+        {
+            par = num;
+            par = par + num;
+        }
+        else 
+        {
+            impar++;    
+        }
+    }
+    
+    printf ("Soma dos valores pares: %d\n", par);
+    printf("Quantida de valores ímpares: %d", impar);
+    
+ 
+    
+    return 0;
+}
