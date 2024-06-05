@@ -31,16 +31,6 @@ void quadrado_magico (int num) // função tipo void pois não sairá um resulta
             c = c_prox;
         }
     }
-    
-    printf("Quadrado Mágico %d x %d:\n", num, num);
-    for (l = 0; l < num; l++)
-    {
-        for (c = 0; c < num; c++) 
-        {
-            printf("%d ", matriz[l][c]);
-        }
-        printf("\n");
-    }
 }
 
 int main ()
@@ -54,6 +44,16 @@ int main ()
       printf("Número inválido. Tente novamente com um número ímpar");
     else
     quadrado_magico(num);
+
+printf("Quadrado Mágico %d x %d:\n", num, num);
+    for (l = 0; l < num; l++)
+    {
+        for (c = 0; c < num; c++) 
+        {
+            printf("%d ", matriz[l][c]);
+        }
+        printf("\n");
+    }
     
     return 0;
 }
