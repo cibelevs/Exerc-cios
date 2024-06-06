@@ -1,13 +1,13 @@
 #include<stdio.h>
-  const int max = 6;
-  int F[max];
+  const int MAX = 6;
+  int F[MAX];
   int i;
   
 int main ()
 {
   F[0] = 1;
   
-  for(i=1; i<max; i++)
+  for(i=1; i<MAX; i++)
   {
     F[i] = i * F[i - 1];
     printf(" %d ", F[i]);
