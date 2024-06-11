@@ -21,3 +21,26 @@ int main ()
 
     return 0;
 }
+
+//sem usar matrizes 
+#include <stdio.h>
+int main ()
+{
+    int x;
+    int i = 0;
+ 
+    for(x = 1; x  <= 10;)
+    {
+        printf("\nTabuada do %d:", x);
+        while (i <= 10)
+        {
+            int y = x * i;
+            i++;
+            printf (" %d ",y);
+        }
+        i = 0;
+        x++;
+    }
+   
+    return 0;
+}
