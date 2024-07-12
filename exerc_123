@@ -52,3 +52,26 @@ int main()
 
     return 0;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Faça um algoritmo que leia dois valores e, através de uma comparação,
+//escreva o maior deles. Considere que os dois valores são diferentes.
+#include<stdio.h>
+int main ()
+{
+    int num1, num2;
+    
+    printf("Insira um valor: ");
+    scanf ("%d",&num1);
+    
+    printf("Insira um valor: ");
+    scanf ("%d",&num2);
+    
+    if (num1>num2)
+        printf("Maior valor: %d", num1);
+    if (num2> num1)
+        printf("Maior valor: %d", num2);
+    else 
+        printf("Operação inválida. Números iguais.");
+
+    return 0;
+}
