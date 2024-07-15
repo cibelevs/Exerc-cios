@@ -87,3 +87,60 @@ int main ()
     printf ("%d %d %d", menor, meio, maior);
     return 0;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Escreva um algoritmo que leia os valores das quatro provas de um aluno e 
+//escreva a média aritmética considerando apenas as três melhores notas. 
+//Por exemplo, se os valores lidos foram 9, 9.5, 7, e 8, a média será (9 + 9.5 + 8)/3 (a prova de nota 7 é descartada). 
+//Dica: Não esqueça de considerar a possibilidade de ocorrerem notas iguais
+
+#include<stdio.h>
+int main ()
+{
+    float not1, not2, not3, not4;
+    float media;
+    float maior1, maior2, maior3;
+    
+    printf("Insira valor da prova 1: ");
+    scanf ("%f", &not1);
+    
+    printf("Insira valor da prova 2: ");
+    scanf ("%f", &not2);
+    
+    printf("Insira valor da prova 3: ");
+    scanf ("%f", &not3);
+    
+    printf("Insira valor da prova 4: ");
+    scanf ("%f", &not4);
+    
+    if(not1<not2 && not1 < not3 && not1 < not4)
+    {
+        maior1 = not2;
+        maior2 = not3;
+        maior3 = not4;
+    }
+    else 
+    if (not2 <not1 && not2 < not3 && not2 < not4)
+    {
+       maior1 = not1;
+       maior2 = not3;
+       maior3 = not4;
+    }
+    else 
+    if (not3 <not1 && not3 < not2 && not3 < not4)
+    {
+       maior1 = not1;
+       maior2 = not2;
+       maior3 = not4;
+    }
+    else 
+    {
+       maior1 = not1;
+       maior2 = not2;
+       maior3 = not3;
+    }
+
+    media = (maior1 + maior2 + maior3) / 3 ;
+    printf ("Média do aluno: %f", media);
+
+    return 0;
+}
