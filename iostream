@@ -1,20 +1,20 @@
-\\nova biblioteca
+//nova biblioteca
 #include <iostream>
-\\esclarecendo 
+//esclarecendo 
 using namespace std;
-\\ função principal
+//função principal
 int main ()
 {
-    int vidas = 0; \\ declarou variavel inteira
-    char letra = 'c'; \\ declarou variavel do tipo caractere
-    double decimal = 5.999999; \\declarou variavel decimal (mais preciso)
-    float mdecimal = 5.9; \\declarou variavel decimal (menos preciso)
-    bool vivo = true;  \\declarou variavel V ou F
-    string  nome = "Cibele";  \\declarou variavel tipo texto
+    int vidas = 0; //declarou variavel inteira
+    char letra = 'c'; //declarou variavel do tipo caractere
+    double decimal = 5.999999; //declarou variavel decimal (mais preciso)
+    float mdecimal = 5.9; //declarou variavel decimal (menos preciso)
+    bool vivo = true;  //declarou variavel V ou F
+    string  nome = "Cibele";  //declarou variavel tipo texto
     
     
-    cout << "Digite o valor de vidas: "; \\output<<
-    cin >> vidas;                         \\input>>
+    cout << "Digite o valor de vidas: "; //output<<
+    cin >> vidas;                         //input>>
     cout << "Digite uma letra: ";
     cin >> letra;
     cout << "Digite um valor decimal: ";
@@ -22,7 +22,7 @@ int main ()
     cout << "Digite o seu nome: ";
     cin >> nome;
     
-    cout << "\n"; \\quebra de linha
+    cout << "\n"; //quebra de linha
     cout << vidas << "\n";
     cout << letra << "\n";
     cout << decimal << "\n";
