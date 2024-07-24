@@ -58,3 +58,86 @@ int main()
     
     return 0;
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+#include<stdio.h>
+//declarando função tipo void 
+void magic_square (int tamanho)
+{
+    //declarando as variaveis da matriz
+    int l, c;
+    int square [3][3];
+    
+    for (l =0; l<tamanho; l++)
+    {
+        for(c =0; c<tamanho; c++)
+        {
+            square[l][c]=0;
+       }
+       //declarando valores como zero
+    } 
+    
+    //colocando as iniciais do quadrado mágico, começando do meio
+    l = 0;
+    c = tamanho / 2;
+    //declarando as novas variaveis para realizar a regra do quadrado magico
+    int valores = 1;
+    int l_prox;
+    int c_prox;
+    
+    while (valores <= tamanho*tamanho)
+    {
+        //colocando todos valores do quadrado na matriz 
+        square[l][c] = valores;
+        valores++;
+        
+        //realizando a regra do quadrado sobe e diagonal
+        l_prox = (l + tamanho - 1)%tamanho;
+        c_prox = (c + tamanho - 1)%tamanho;
+        
+        //caso o numero sair da matriz 
+        if (square[l_prox][c_prox] != 0)
+        {
+            l = (l + 1)% tamanho;
+        }
+        //caso o numero não saia da matriz
+        else 
+        {
+            l = l_prox;
+            c = c_prox;
+        }
+    }
+    
+    //imprimindo a matriz
+    for (l =0; l<tamanho; l++)
+    {
+        for(c =0; c<tamanho; c++)
+        {
+            printf(" %d ", square[l][c]);
+       }
+    printf("\n");
+    } 
+    
+}
+
+int main ()
+{
+    int tamanho;
+    
+    printf ("Insira o tamanho do quadrado mágico: ");
+    scanf("%d", &tamanho);
+    
+    //caso o usuario coloque um numero par 
+    if ( tamanho % 2 == 0)
+    {
+        printf("Número inválido.");
+        return 0;
+    }
+    //caso o usuario coloque um numero impar
+    else 
+    {
+        magic_square(tamanho);
+    }
+    return 0;
+}
