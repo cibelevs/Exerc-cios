@@ -1,0 +1,70 @@
+//Escrever um algoritmo para um programa que leia um conjunto de 50 fichas contendo cada uma,
+//o nome, altura e o sexo de uma pessoa. Calcule e imprima :
+//a) A maior e a menor altura da turma 
+//b) A média de altura das mulheres 
+//c) A média de altura da turma
+#include<stdio.h>
+int main ()
+{
+    int max = 5;
+    int c;
+    
+    float altura[max];
+    char sex[max];
+    char nome[10];
+    
+    int mulheres;
+    float altura_mulheres;
+    float altura_geral;
+    float Alt_maior = 0;
+    float Alt_menor = 1000;
+    float menor, maior;
+    
+    for (int i = 0; i < max; i++)
+    {
+         while (c < max)
+        {
+            printf ("\nInsira seu nome: ");
+            scanf("%s", &nome);
+            
+            printf("Insira sua altura: ");
+            scanf("%f", &altura[i]);
+            
+            altura_geral = altura_geral + altura[i];
+            
+            if (altura[i] > Alt_menor)
+                menor = altura[i];
+            else 
+            {
+                if (altura[i] < Alt_maior)
+                maior = altura[i];
+            }
+        
+            printf("Insira seu sexo: ");
+            scanf(" %c", &sex[i]); 
+            
+            if (sex[i] != 'M' && sex[i] != 'F')
+            {
+                printf("Sexo inválido. Insira 'M' ou 'F' para cadastro\n");
+                return 0;
+            }
+        
+            if ( sex [i] == 'F')
+            {
+                altura_mulheres = altura_mulheres + altura[i];
+                mulheres++;
+            }
+            c++;
+        }
+  
+    }
+    
+   float Media_mulheres = altura_mulheres / mulheres;
+   float Media_geral = altura_geral / max;
+    
+    printf("\nA maior altura da turma é de : %f \n A menor altura da turma é de :%f ", maior , menor);
+    printf("\nA média de altura das mulheres foi de: %f ", Media_mulheres);
+    printf("\nA média de altura da turma foi de: %f ", Media_geral);
+    
+    return 0;
+}
