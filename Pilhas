@@ -1,0 +1,52 @@
+#include<iostream>
+#define TAM 5
+
+class Pilha{
+    private:
+    int topo;
+    int array[TAM];
+
+    public:
+
+    Pilha(){
+        topo = - 1;
+    }
+
+    bool pilhaVazia(){
+        if(topo == - 1){
+            return true;
+        }
+        return false;
+    }
+
+    bool pilhaCheia(){
+        if(topo == TAM - 1){
+            return true;
+        }
+        return false;
+    }
+
+    void preenchePilha(int num){
+        if (pilhaCheia()){
+            printf("Impossível preencher. Pilha esta cheia");
+            return;
+        }
+        printf("Preenchendo o numero %d no vetor ", num);
+        array[++topo] = num;
+    }
+
+    void imprimeElementos(){
+        for (int i = 0; i <= topo; i++){
+            printf("\nElemento %d: %d", i, array[i]);
+        }
+    }
+};
+
+int main (void){
+    Pilha p;
+    p.preenchePilha(5);
+    p.imprimeElementos();
+
+
+    return 0;
+}
