@@ -32,7 +32,21 @@ class PilhaDinamica{
 
         topo = novo; //atualiza o topo sempre ao final do processo
     };
-    void desempilhar();
+      void desempilhar(){
+        //vamos criar um ponteiro auxiliar para desempilhar
+        Nodo * aux;
+        //se topo é nulo não tem nenhum elemento na pilha
+        if (topo == nullptr){
+            cout<<"Pilha está vazia";
+            return;
+        }
+        else {
+        aux = topo -> prox;
+        delete 
+            
+        }
+        
+    };
     void listar();
 };
 
