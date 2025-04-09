@@ -58,7 +58,19 @@ class PilhaDinamica{
         }
         
     };
-    void listar();
+    void listar(){
+        //criando um ponteiro auxiliar 
+        Nodo * auxiliar;
+        //aponta para o primeiro elemento
+        auxiliar = topo;
+
+        //enquanto auxiliar for diferente de nulo, ele irá imprimir elementos
+        while (auxiliar != nullptr){
+            cout<< auxiliar->info <<endl; //imprimir o elemento apontado em info
+            auxiliar = auxiliar -> prox;  // passa a apontar para a prox regiao
+        }
+
+    };
 };
 
 int main (void){
