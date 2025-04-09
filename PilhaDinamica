@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+
+struct Nodo
+{
+    int info;
+    struct Nodo * prox;
+};
+
+class PilhaDinamica{
+    private:
+    Nodo * topo;
+
+    public:
+    PilhaDinamica(){
+        topo = nullptr;
+    };
+    
+    void empilhar(int valorEmpilhar){
+        //criar ponteiro auxiliar
+        Nodo * novo;
+        novo = new Nodo(); //vai criar uma área:  |     info       |    prox       |
+                           //                     | valorEmpilhar  |      /null    |
+        novo->info = valorEmpilhar;
+        //coloca o valorEmpilhar na área info de 'novo'
+        if(topo == nullptr){
+            //não há nada na pilha, o novo elemento é
+            //o primeiro a ser empilhado!
+            novo->prox = nullptr; 
+            //já que é o primeiro elemento, prox recebe null pois
+            //não tem nenhum próximo elemento
+        }
+        else {
+            novo->prox = topo; // a região prox desse novo elemento vai apontar para 
+            //o endereço da primeira região, observe  |            info                   |            prox          |
+            //                                        | valorEmpilhar (de dois para cima) | endereço de info ANTERIOR|
+        }
+
+        topo = novo; //atualiza o topo sempre ao final do processo
+        //TOPO sempre terá a estrutura do primeiro elemento 
+        cout << "Valor empilhado: " << valorEmpilhar << endl;
+    };
+
+    void desempilhar(){
+        //vamos criar um ponteiro auxiliar para desempilhar
+        Nodo * aux;
+        //se topo é nulo não tem nenhum elemento na pilha
+        if (topo == nullptr){
+            cout << "Pilha está vazia" << endl;
+            return;
+        }
+        else {
+            aux = topo; //"pega" o topo atual
+            topo = topo->prox; // topo passa a ser o elemento do nodo anterior
+            int valorDesempilhar = aux->info; //para devolver esse valor
+            cout << "Valor desempilhado: " << valorDesempilhar << endl;                       
+            delete aux; //deleta o elemento que estava no topo da pilha  
+        }
+        
+    };
+    void listar(){
+        //criando um ponteiro auxiliar 
+        Nodo * auxiliar;
+        //aponta para o primeiro elemento
+        auxiliar = topo;
+
+        //enquanto auxiliar for diferente de nulo, ele irá imprimir elementos
+        while (auxiliar != nullptr){
+            cout << auxiliar->info << endl; //imprimir o elemento apontado em info
+            auxiliar = auxiliar -> prox;  // passa a apontar para a próxima região
+        }
+
+    };
+};
+
+int main (void){
+    PilhaDinamica pilha;
+    pilha.empilhar(10);
+    pilha.empilhar(20);
+    pilha.empilhar(30);
+
+    pilha.listar();
+
+    pilha.desempilhar();
+    pilha.desempilhar();
+    pilha.desempilhar();
+    pilha.desempilhar(); // para testar pilha vazia
+
+    return 0;
+}
