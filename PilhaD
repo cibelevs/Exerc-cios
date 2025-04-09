@@ -1,4 +1,5 @@
 #include<iostream>
+using namespace std;
 
 struct Nodo
 {
@@ -18,21 +19,28 @@ class PilhaDinamica{
     void empilhar(int valorEmpilhar){
         //criar ponteiro auxiliar
         Nodo * novo;
-        novo = new Nodo();
+        novo = new Nodo(); //vai criar uma area:  |     info       |    prox       |
+                           //                     | valorEmpilhar  |      /null    |
         novo->info = valorEmpilhar;
-
+        //coloca o valorEmpilha na area info de 'novo'
         if(topo == nullptr){
             //não há nada na pilha, o novo elemento é
             //o primeiro a ser empilhado!
-            novo->prox = nullptr;
+            novo->prox = nullptr; 
+            //já que é o primeiro elemento, prox recebe null pois n
+            //tem nada antes dele
         }
         else {
-            novo->prox = topo;
+            novo->prox = topo; // a regiao prox desse novo elemento vai apontar para 
+            //o endereço da primeira regiao, observe  |            info                   |            prox          |
+            //                                        | valorEmpilhar (de dois para cima) | endereço de info ANTERIOR|
         }
 
         topo = novo; //atualiza o topo sempre ao final do processo
+        //TOPO sempre terá a estrutura do primeiro elemento 
     };
-      void desempilhar(){
+
+    void desempilhar(){
         //vamos criar um ponteiro auxiliar para desempilhar
         Nodo * aux;
         //se topo é nulo não tem nenhum elemento na pilha
@@ -41,9 +49,9 @@ class PilhaDinamica{
             return;
         }
         else {
-        aux = topo -> prox;
-        delete 
-            
+            aux = topo; //"pega" o topo atual
+            topo->prox; // topo passa a ser o elmento do nodo anterior
+            delete aux; //deleta o elemento que estava no topo da pilha  
         }
         
     };
