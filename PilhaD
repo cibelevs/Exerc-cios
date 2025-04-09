@@ -1,0 +1,43 @@
+#include<iostream>
+
+struct Nodo
+{
+    int info;
+    struct Nodo * prox;
+};
+
+class PilhaDinamica{
+    private:
+    Nodo * topo;
+
+    public:
+    PilhaDinamica(){
+        topo = nullptr;
+    };
+    
+    void empilhar(int valorEmpilhar){
+        //criar ponteiro auxiliar
+        Nodo * novo;
+        novo = new Nodo();
+        novo->info = valorEmpilhar;
+
+        if(topo == nullptr){
+            //não há nada na pilha, o novo elemento é
+            //o primeiro a ser empilhado!
+            novo->prox = nullptr;
+        }
+        else {
+            novo->prox = topo;
+        }
+
+        topo = novo; //atualiza o topo sempre ao final do processo
+    };
+    void desempilhar();
+    void listar();
+};
+
+int main (void){
+    PilhaDinamica pilha;
+
+    return 0;
+}
