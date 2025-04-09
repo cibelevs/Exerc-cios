@@ -38,6 +38,7 @@ class PilhaDinamica{
 
         topo = novo; //atualiza o topo sempre ao final do processo
         //TOPO sempre terá a estrutura do primeiro elemento 
+        cout<<"Valor empilhado: %d\n", valorEmpilhar;
     };
 
     void desempilhar(){
@@ -50,7 +51,9 @@ class PilhaDinamica{
         }
         else {
             aux = topo; //"pega" o topo atual
-            topo->prox; // topo passa a ser o elmento do nodo anterior
+            topo = topo->prox; // topo passa a ser o elmento do nodo anterior
+            int valorDesempilhar = aux->info; //para devolver esse valor
+            cout<<"Valor desempilhado: %d\n", valorDesempilhar;                       
             delete aux; //deleta o elemento que estava no topo da pilha  
         }
         
