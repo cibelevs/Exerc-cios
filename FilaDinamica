@@ -1,0 +1,106 @@
+#include<iostream>
+using namespace std;
+
+struct Nodo {
+    int info;
+    struct Nodo * prox;
+};
+
+class FilaDinamica
+{
+    private:
+    Nodo * inicio;
+    Nodo * fim;
+
+    public:
+
+    FilaDinamica(){
+        inicio = nullptr;
+        fim = nullptr;
+    }
+
+    bool filaVazia(Nodo * inicioFila){
+        if(inicioFila = nullptr)
+        return true;
+        else 
+        return false;
+    }
+
+    void enfileirar(int el){
+        Nodo * novo;
+        novo = new Nodo();
+
+        if (novo == nullptr){
+            cout<<"Memória cheia"<<endl;
+            return;
+        }
+
+        novo->info = el;
+
+        if(inicio = nullptr){
+            inicio = novo;
+            fim = novo;
+        }
+        else {
+            fim->prox = novo;
+            fim = novo;
+        }
+    }
+
+    void desenfileirar() {
+        if (filaVazia) {
+            cout << "Fila está vazia" << endl;
+            return;
+        }
+
+        Nodo * aux = inicio;
+        int valor = aux->info;
+
+        inicio = inicio->prox;
+
+        // Se a fila ficar vazia após remover o elemento
+        if (inicio == nullptr) {
+            fim = nullptr;
+        }
+
+        delete aux;
+        cout << "Valor desenfileirado: " << valor << endl;
+    }
+
+    void listar() {
+        Nodo * aux = inicio;
+
+        if (filaVazia) {
+            cout << "Fila está vazia" << endl;
+            return;
+        }
+
+
+        while (aux != nullptr) {
+            cout << aux->info << " ";
+            aux = aux->prox;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    FilaDinamica fila;
+
+    fila.enfileirar(10);
+    fila.enfileirar(20);
+    fila.enfileirar(30);
+
+    cout << "Fila atual: ";
+    fila.listar();
+
+    fila.desenfileirar();
+    fila.desenfileirar();
+    fila.desenfileirar();
+    fila.desenfileirar(); // testar fila vazia
+
+    return 0;
+}
+
+
+
