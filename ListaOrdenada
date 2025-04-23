@@ -1,0 +1,117 @@
+#include <iostream>
+using namespace std ;
+
+struct Nodo{
+    int info;
+    struct Nodo * prox;
+};
+
+
+class Lista{
+    private:
+    Nodo * inicio;
+    
+    public:
+
+    Lista(){
+        inicio = nullptr;
+    }
+
+    void inserir(int valorInserido){
+        Nodo * novo;
+        novo = new Nodo();
+        if (novo == nullptr){
+            cout<<"Memória cheia";
+            return;
+        }
+
+        Nodo * atual, * ant; //ponteiros auxiliares 
+        
+        if(inicio == nullptr){
+            novo->prox = nullptr;
+            inicio = novo; //primeiro elemento da lista 
+            return; // nao entendi o porque do return aqui
+        }
+        atual = inicio; //atual e inicio aponta para o mesmo lugar!
+        // nesse caso a primeira condição
+
+        while((atual != inicio) &&(novo->info > atual->info)){
+            //caso atual e inicio forem diferentes e o novo valor inserido for maior
+            // do que o valor que já esta na lista
+            ant = atual; // atual passa a ser anterior
+            atual =  atual->info; //atual é atualizado
+        }
+        if(atual == nullptr){
+            //caso passou por todos os elementos da lista
+            ant->prox = novo; //anterior aponta para novo
+            novo->prox = nullptr; //é o último elemento
+        }
+        else {
+            if(atual == inicio){
+                //nesse caso o valor inserido é o novo menor elemento
+                //da lista
+                novo->prox = inicio; 
+                inicio = novo; //passa ao inicio
+            }
+            else {
+                //se encontra no meio da lista
+                ant->prox = novo; //o numero anterior ao atual, passa a 
+                //apontar para o mais novo elemento
+                novo->prox = atual;
+            }
+        }
+
+
+    }
+
+    void retirar(int valorRetirar){
+        Nodo * anterior, * atual;
+        //observa se a lista está vazia;
+        if(inicio == nullptr){
+            cout<<"Lista Ordenada está vazia"<<endl;
+            return;
+        }
+        
+        atual= inicio; //atual passa a ser um auxiliar! e não o final em si
+
+        while ((atual != nullptr) && (atual->info != valorRetirar)){
+            anterior = atual;
+            atual = atual->prox; //vai "andando" pela fila enquanto o valor pedido
+            //pelo usuário não foi encontrado
+        }
+
+        if(atual == nullptr){
+            //chegou ao final da lista e nenhum valor foi encontradi
+            cout<<"Não foi possível encontrar o valor na Lista"<<endl;
+            return;
+        }
+
+        if(atual == inicio){
+            //se o numero pedido estiver no 1 lugar da lista
+            inicio = inicio -> prox;
+        }
+        else {
+            //se o numero pedido estiver no meio da lista
+            anterior -> prox = atual;
+        }
+
+        delete atual;//deleta o atual (auxiliar)
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    }
