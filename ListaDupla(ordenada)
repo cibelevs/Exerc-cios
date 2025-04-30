@@ -17,7 +17,7 @@ class ListaDupla{
     }
 
     void inserirOrdenada(int valor){
-        Nodo novo;
+        Nodo * novo;
         novo = new Nodo(); //cria um novo nodo nesse modelo:         |  ant |   info    | prox  |
                            //                                        |   *  |    x      |   *   |
 
@@ -102,7 +102,6 @@ class ListaDupla{
 
     void listarElementos(){
         Nodo * aux;
-        int valores;
         aux = inicio;
         if(inicio == nullptr){
             cout<<"Lista está vazia"<<endl;
@@ -110,10 +109,9 @@ class ListaDupla{
         }
 
         cout<<"Listar elementos da Lista"<<endl;
-        while(inicio != nullptr){
-            aux->info = valores;
-            cout<<valores<<endl;
-            aux = inicio->prox;
+        while(aux != nullptr){
+            cout<< aux->info<<endl;
+            aux = aux->prox;
         }
 
     }
@@ -131,7 +129,8 @@ class ListaDupla{
 
         cout<<"Imprimindo ao contrario..."<<endl;
         while(help->ant != nullptr){
-            cout<<help->ant<<endl;
+            cout<<help->info<<endl;
+            help = help->ant;
         }
     }
 
