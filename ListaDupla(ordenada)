@@ -1,0 +1,120 @@
+#include <iostream>
+using namespace std;
+
+Struct Nodo{
+    int info;
+    Struct Nodo * ant, * prox;
+};
+
+class ListaDupla{
+    private: 
+    Nodo * inicio, * atual;
+    public:
+
+    ListaDupla(){
+        inicio = nullptr;
+        atual = nullptr;
+    }
+
+    void inserirOrdenada(int valor){
+        Nodo novo;
+        novo = new Nodo();
+
+        if (novo == nullptr){
+            cout<<"Erro ao alocar"<<endl;
+            return;
+        }
+
+        novo->info = valor;
+        
+        if(inicio == nullptr){
+            novo->ant = nullptr;
+            novo->prox = nullptr;
+        }
+
+        atual = novo;
+
+        while(atual != nullptr && (atual->info < novo->info)){
+            atual = atual->prox;
+        }
+
+        if(atual->prox == nullptr && (atual->info < novo->info)){
+            atual->prox = novo;
+            novo->ant = atual;
+            novo->prox = nullptr;
+        }
+
+        if(atual == inicio){
+            novo->prox = inicio;
+            inicio->ant = novo;
+            inicio = novo;
+            novo->ant = nullptr;
+        }
+        else {
+            novo->ant = atual->ant;
+            atual->ant = prox->novo;
+            novo->prox = atual;
+            atual->ant = novo;
+        }
+    }
+
+    void retirarDaLista(int valor){
+        
+        if(inicio == nullptr){
+            cout<<"A lista está vazia"<<endl;
+            return;
+        }
+
+        atual = inicio;
+
+        while((atual != nullptr) && (novo->info > atual->info)){
+            atual = atual -> prox;
+        }
+
+        if(atual == nullptr){
+            cout<<"Esse valor não está na lista"<<endl;
+            return;
+        }
+
+        if((inicio == atual) && (atual->prox == nullptr)){
+            inicio = nullptr;
+        }
+
+        if (inicio == atual){
+            inicio = inicio => prox;
+            inicio->ant = nullptr;
+        }
+        else {
+            if(atual->prox == nullptr){
+                atual->ant->prox = nullptr;
+            }
+            else{
+                atual->ant->prox = atual -> prox;
+                atual->prox->ant = atual->ant;
+            }
+        }
+
+        delete atual;
+    }
+
+    void listarElementos(){
+        Nodo * aux;
+        int valores;
+        aux = inicio;
+
+        cout<<"Listar elementos da Lista"<<endl;
+        while(inicio != nullptr){
+            aux->info = valores;
+            cout<<valores<<endl;
+            aux = inicio->prox;
+        }
+
+    }
+
+
+
+
+
+
+
+};
