@@ -12,45 +12,48 @@ class ListaDupla{
     public:
 
     ListaDupla(){
-        inicio = nullptr;
+        inicio = nullptr; //inicializa os ponteiros como nulo
         atual = nullptr;
     }
 
     void inserirOrdenada(int valor){
         Nodo novo;
-        novo = new Nodo();
+        novo = new Nodo(); //cria um novo nodo nesse modelo:         |  ant |   info    | prox  |
+                           //                                        |   *  |    x      |   *   |
 
         if (novo == nullptr){
-            cout<<"Erro ao alocar"<<endl;
+            cout<<"Erro ao alocar"<<endl; //verifica se da para alocar
             return;
         }
 
-        novo->info = valor;
-        
-        if(inicio == nullptr){
-            novo->ant = nullptr;
+        novo->info = valor;   // insere o valor             |  ant |   info    | prox  |
+        //                                                  |   *  |  valor    |   *   |
+
+        if(inicio == nullptr){ //inserindo o primeiro elemento! |  ant |   info    | prox  |
+            novo->ant = nullptr;          //                    | null |  valor    |  null |
             novo->prox = nullptr;
         }
 
-        atual = novo;
+        atual = novo; // atualiza a lista
 
-        while(atual != nullptr && (atual->info < novo->info)){
-            atual = atual->prox;
+        while(atual != nullptr && (atual->info < novo->info)){ //avança para caso se o novo número for Maior que o atual
+            atual = atual->prox;                               //  ou seja, vai ficar mais para o final da lista
         }
 
-        if(atual->prox == nullptr && (atual->info < novo->info)){
-            atual->prox = novo;
+        if(atual->prox == nullptr && (atual->info < novo->info)){ //se o ultimo elemento da lista for menor que o novo
+            atual->prox = novo;                                   // ou seja o novo vai para o FINAL dA LISTA
             novo->ant = atual;
             novo->prox = nullptr;
         }
 
-        if(atual == inicio){
-            novo->prox = inicio;
+        if(atual == inicio){    //caso o NOVO seja o menor elemento da lista
+            novo->prox = inicio; // ou seja ele vai para o ÍNICIO
             inicio->ant = novo;
             inicio = novo;
             novo->ant = nullptr;
         }
         else {
+            //situação do meio da lista!!!!!
             novo->ant = atual->ant;
             atual->ant = prox->novo;
             novo->prox = atual;
@@ -59,7 +62,7 @@ class ListaDupla{
     }
 
     void retirarDaLista(int valor){
-        
+        //verifica se a lista esta vazia
         if(inicio == nullptr){
             cout<<"A lista está vazia"<<endl;
             return;
@@ -67,16 +70,16 @@ class ListaDupla{
 
         atual = inicio;
 
-        while((atual != nullptr) && (novo->info > atual->info)){
-            atual = atual -> prox;
+        while((atual != nullptr) && (novo->info > atual->info)){ //avança para caso se o número ecolhido for Maior que o atual
+            atual = atual->prox;                               //  ou seja, está mais para o final da lista
         }
 
-        if(atual == nullptr){
+        if(atual == nullptr){ //percorreu a lista e nao encontrou o valor
             cout<<"Esse valor não está na lista"<<endl;
             return;
         }
 
-        if((inicio == atual) && (atual->prox == nullptr)){
+        if((inicio == atual) && (atual->prox == nullptr)){ // é o primeiro e unico elemento da lista
             inicio = nullptr;
         }
 
@@ -101,6 +104,10 @@ class ListaDupla{
         Nodo * aux;
         int valores;
         aux = inicio;
+        if(inicio == nullptr){
+            cout<<"Lista está vazia"<<endl;
+            return;
+        }
 
         cout<<"Listar elementos da Lista"<<endl;
         while(inicio != nullptr){
@@ -110,11 +117,22 @@ class ListaDupla{
         }
 
     }
+    void listarElementosContrario(){
+        Nodo * help;
+        help = inicio;
+        if(inicio == nullptr){
+            cout<<"Lista está vazia"<<endl;
+            return;
+        }
 
+        while(inicio->prox != nullptr){
+            help = help->prox;
+        }
 
-
-
-
-
+        cout<<"Imprimindo ao contrario..."<<endl;
+        while(help->ant != nullptr){
+            cout<<help->ant<<endl;
+        }
+    }
 
 };
