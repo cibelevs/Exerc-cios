@@ -48,7 +48,7 @@ class ListaCircular{
             fim = novo;
         } 
     }
-    void retirarPalavra(){
+      void retirarPalavra(){
         Nodo2 * aux;
 
         if(inicio == nullptr){
@@ -61,18 +61,12 @@ class ListaCircular{
             aux = aux->prox;
         }
 
-        if(aux->prox == fim){
-            cout<<"Essa palavra não esta na lista circular"<<endl;
-            return;
-        }
-
-        
-
-
-
-
+        fim = aux ->ant;
+        fim ->prox = inicio;
+        delete aux;
 
     }
+    
     
     
 
