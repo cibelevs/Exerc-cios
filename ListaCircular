@@ -67,7 +67,19 @@ class ListaCircular{
 
     }
     
-    
+       void imprimirFila(){
+        Nodo2 * auxiliar;
+        
+        cout<<"Imprimindo a fila completa"<<endl;
+        
+        auxiliar = inicio;
+        while(auxiliar->prox != inicio){
+            cout<<auxiliar->palavra<<endl;
+            auxiliar = auxiliar->prox;
+        }
+
+    }
+
     
 
 
