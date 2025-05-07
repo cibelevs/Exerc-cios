@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+//criando struct nodo2
+struct Nodo2 {
+    char palavra[20];
+    struct Nodo2 *ant, *prox;
+};
+
+class ListaCircular{
+    //criando variaveis auxiliar
+    private:
+    Nodo2 * inicio, * atual , *fim;
+
+    public:
+    //construtor
+    ListaCircular(){
+        inicio = nullptr;
+        atual = nullptr;
+        fim = nullptr;
+    }
+
+    void inserirPalavra(char word[]){
+        Nodo2 * novo;
+        novo = new Nodo2();
+
+        if(novo == nullptr){
+            cout<<"Erro ao alocar memoria"<<endl;
+            return;
+        }
+
+        //novo->palavra = word;
+
+        //primeiro elemento (primeira palavra)
+        if(inicio == nullptr){
+            inicio = novo;
+            novo->ant = inicio;
+            novo->prox = inicio;
+            atual = inicio;
+            fim = inicio;
+        } 
+        else{
+            atual->prox = novo;
+            novo->ant = atual;
+            novo->prox = inicio;
+            atual = novo;
+            fim = novo;
+        } 
+        
+
+    }
+    
+
+
+};
