@@ -9,30 +9,30 @@ struct Nodo2 {
 };
 
 class ListaCircular{
-    //criando variaveis auxiliar
+    //criando variaveis auxiliares inicio e fim (fila)
     private:
     Nodo2 * inicio, *fim;
 
     public:
-    //construtor
     ListaCircular(){
         inicio = nullptr;
         fim = nullptr;
     }
 
     void inserirPalavra(char word[]){
+        //criando um novo Nodo tipo Nodo2
         Nodo2 * novo;
         novo = new Nodo2();
 
         if(novo == nullptr){
-            cout<<"Erro ao alocar memoria"<<endl;
+            cout<<"Erro ao alocar memoria"<<endl; //avisar ao usuário caso erro
             return;
         }
 
-        //inserir palavra no Nodo
+        //inserir palavra no Nodo (função da biblioteca cstring)
         strcpy(novo->palavra, word);
 
-        //primeiro elemento (primeira palavra)
+        // 1 caso - primeiro elemento (primeira palavra)
         if(inicio == nullptr){
             inicio = novo;
             novo->ant = inicio;
@@ -40,7 +40,7 @@ class ListaCircular{
             fim = inicio;
         } 
         else{
-            //seguindo a ordem, fazendo as mudanças no NOVO primeiro
+            //2 caso - proximas palavras, fazendo as mudanças no NOVO primeiro
             novo->ant = fim;
             novo->prox = inicio;
             fim->prox = novo;
