@@ -1,0 +1,191 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+//criando struct nodo2
+struct Nodo2 {
+    char palavra[20];
+    struct Nodo2 *ant, *prox;
+};
+
+class ListaCircular {
+    //criando variaveis auxiliares inicio e fim (fila)
+private:
+    Nodo2 *inicio, *fim, *atual; //ponteiro "atual" para a palavra atual
+
+public:
+    ListaCircular() {
+        inicio = nullptr;
+        fim = nullptr;
+        atual = nullptr;
+    }
+
+    void inserirPalavra(char word[]) {
+        //criando um novo Nodo tipo Nodo2
+        Nodo2 *novo;
+        novo = new Nodo2();
+
+        if (novo == nullptr) {
+            cout << "Erro ao alocar memoria" << endl; //avisar ao usuário caso erro
+            return;
+        }
+
+        //inserir palavra no Nodo (função da biblioteca cstring)
+        strcpy(novo->palavra, word);
+
+        // 1 caso - primeiro elemento (primeira palavra)
+        if (inicio == nullptr) {
+            inicio = novo;
+            novo->ant = inicio;
+            novo->prox = inicio; //enlaçando com o inicio
+            fim = inicio;
+            atual = inicio; //primeira palavra é a atual
+        } else {
+            //2 caso - proximas palavras, fazendo as mudanças no NOVO primeiro
+            novo->ant = fim;
+            novo->prox = inicio;
+            fim->prox = novo;
+            inicio->ant = novo; //enlaçando com o final
+            fim = novo;
+        }
+    }
+
+    void retirarPalavra() {
+        Nodo2 *aux; //ponteiro auxiliar
+
+        if (inicio == nullptr) {
+            cout << "Não tem elementos na lista" << endl;
+            return;
+        }
+
+        //caso a lista tenha apenas uma palavra (elemento)
+        if (fim == inicio) {
+            delete inicio;
+            fim = nullptr;
+            inicio = nullptr;
+            atual = nullptr;
+            return;
+        }
+
+        //demais casos, retirando o "atual" e modificando os ponteiros
+        aux = atual;
+        aux->ant->prox = aux->prox;
+        aux->prox->ant = aux->ant;
+
+        //atualizar início/fim caso necessário
+        if (aux == inicio) {
+            inicio = aux->prox;
+        }
+        if (aux == fim) {
+            fim = aux->ant;
+        }
+
+        atual = aux->prox; //mover atual pra próxima palavra
+        delete aux;
+    }
+
+    void imprimirFrase() {
+        Nodo2 *auxiliar; //ponteiro auxiliar
+
+        if (inicio == nullptr) {
+            cout << "[Frase vazia]" << endl;
+            return;
+        }
+
+        cout << "Imprimindo a frase completa" << endl;
+
+        auxiliar = inicio;
+        do { //usar do-while para circular corretamente
+            cout << auxiliar->palavra << " ";
+            auxiliar = auxiliar->prox;
+        } while (auxiliar != inicio);
+        cout << endl;
+    }
+
+    void corrigindoPalavra(char wordCor[]) {
+        if (inicio == nullptr) {
+            cout << "Não tem elementos na lista" << endl;
+            return;
+        }
+
+        strcpy(atual->palavra, wordCor); //corrige a palavra atual
+    }
+
+    void moverDireita() {
+        if (inicio == nullptr) {
+            cout << "Lista vazia" << endl;
+            return;
+        }
+        atual = atual->prox;
+    }
+
+    void moverEsquerda() {
+        if (inicio == nullptr) {
+            cout << "Lista vazia" << endl;
+            return;
+        }
+        atual = atual->ant;
+    }
+
+    void mostrarAtual() {
+        if (inicio == nullptr) {
+            cout << "[Lista vazia]" << endl;
+            return;
+        }
+        cout << "Palavra atual: " << atual->palavra << endl;
+    }
+};
+
+int main(void) {
+    ListaCircular list;
+    int opcao;
+    char palavra[20];
+
+    do {
+        cout << "\n////// Menu editor de texto /////" << endl;
+        cout << "1 - Inserir palavra" << endl;
+        cout << "2 - Editar palavra atual" << endl;
+        cout << "3 - Eliminar palavra atual" << endl;
+        cout << "4 - Mover para a direita" << endl;
+        cout << "5 - Mover para a esquerda" << endl;
+        cout << "6 - Imprimir frase completa" << endl;
+        cout << "7 - Sair" << endl;
+        cout << "Digite sua opcao (1-7): ";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                cout << "Digite a palavra a inserir: ";
+                cin >> palavra;
+                list.inserirPalavra(palavra);
+                break;
+            case 2:
+                cout << "Digite a nova palavra para substituir: ";
+                cin >> palavra;
+                list.corrigindoPalavra(palavra);
+                break;
+            case 3:
+                list.retirarPalavra();
+                break;
+            case 4:
+                list.moverDireita();
+                break;
+            case 5:
+                list.moverEsquerda();
+                break;
+            case 6:
+                list.imprimirFrase();
+                break;
+            case 7:
+                cout << "Encerrando programa." << endl;
+                break;
+            default:
+                cout << "Opcao invalida!" << endl;
+        }
+
+        list.mostrarAtual();
+
+    } while (opcao != 7);
+
+    return 0;
+}
