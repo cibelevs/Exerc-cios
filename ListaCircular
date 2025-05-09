@@ -35,8 +35,8 @@ class ListaCircular{
         // 1 caso - primeiro elemento (primeira palavra)
         if(inicio == nullptr){
             inicio = novo;
-            novo->ant = inicio;
-            novo->prox = inicio;
+            novo->ant = inicio; 
+            novo->prox = inicio; //enlaçando com o inicio
             fim = inicio;
         } 
         else{
@@ -49,46 +49,71 @@ class ListaCircular{
         } 
     }
       void retirarPalavra(){
-        Nodo2 * aux;
+        Nodo2 * aux; //ponteiro auxiliar
 
         if(inicio == nullptr){
             cout<<"Não tem elementos na lista"<<endl;
             return;
         }
 
-        aux = inicio;
-        while ((aux->prox != fim) ){
-            aux = aux->prox;
+        //caso a lista tenha apenas uma palavra (elemento)
+        if(fim == inicio){
+            delete inicio;
+            fim = nullptr;
+            inicio = nullptr;
+            return;
         }
-
+        
+        //demais casos, retirando o fim e modificando os ponteiros
+        aux = fim;
+    
         fim = aux ->ant;
         fim ->prox = inicio;
+        inicio->ant = fim;
         delete aux;
 
     }
     
-       void imprimirFila(){
-        Nodo2 * auxiliar;
+    void imprimirFrase(){
+        Nodo2 * auxiliar; //ponteiro auxiliar 
         
-        cout<<"Imprimindo a fila completa"<<endl;
+        cout<<"Imprimindo a frase completa"<<endl;
         
         auxiliar = inicio;
-        while(auxiliar->prox != inicio){
+        while(auxiliar->prox != inicio){ //enquanto não encontrar o ultimo elemento, imprime e avança
             cout<<auxiliar->palavra<<endl;
             auxiliar = auxiliar->prox;
         }
 
     }
-
     
-
-
+    void corrigindoPalavra(char wordCor[]){
+        Nodo2 * helper;
+        
+        if(inicio == nullptr){
+            cout<<"Não tem elementos na lista"<<endl;
+            return;
+        }
+        
+        helper = fim;
+        
+        strcpy(helper->palavra, wordCor); //corrige a ultima palavra
+    }
 };
 
 int main(void){
     ListaCircular list;
-    list.inserirPalavra((char *) "Aula");
+    int opcao;
+    cout<<"////// Menu editor de texto /////"<<endl;
+    cout<<"Insira 1 para inserir palavra"<<endl;
+    cout<<"Insira 2 para editar palavra atual"<<endl;
+    cout<<"Insira 3 para eliminar palavra"<<endl;
+    cout<<"Insira 4 para mover a direita"<<endl;
+    cout<<"Insira 5 para  mover a esquerda"<<endl;
 
+
+    
+    std::cin >> "Insira opcao (1,2,3, 4, 5, 6):";
 
 
     return 0;
