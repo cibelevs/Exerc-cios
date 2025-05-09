@@ -1,10 +1,10 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
 //criando struct nodo2
 struct Nodo2 {
-    char palavra[20];
+    string palavra;
     struct Nodo2 *ant, *prox;
 };
 
@@ -19,6 +19,10 @@ public:
         fim = nullptr;
         atual = nullptr;
     }
+    
+    bool listaVazia(){
+        return inicio==nullptr;
+    }
 
     void inserirPalavra(char word[]) {
         //criando um novo Nodo tipo Nodo2
@@ -30,11 +34,11 @@ public:
             return;
         }
 
-        //inserir palavra no Nodo (função da biblioteca cstring)
-        strcpy(novo->palavra, word);
+        //inserir palavra no Nodo 
+        novo->palavra = word;
 
         // 1 caso - primeiro elemento (primeira palavra)
-        if (inicio == nullptr) {
+        if (listaVazia()) {
             inicio = novo;
             novo->ant = inicio;
             novo->prox = inicio; //enlaçando com o inicio
@@ -87,15 +91,15 @@ public:
     void imprimirFrase() {
         Nodo2 *auxiliar; //ponteiro auxiliar
 
-        if (inicio == nullptr) {
-            cout << "[Frase vazia]" << endl;
+        if (listaVazia()) {
+            cout << "Frase vazia" << endl;
             return;
         }
 
-        cout << "Imprimindo a frase completa" << endl;
+        cout << "Imprimindo a frase completa: " << endl;
 
         auxiliar = inicio;
-        do { //usar do-while para circular corretamente
+        do {
             cout << auxiliar->palavra << " ";
             auxiliar = auxiliar->prox;
         } while (auxiliar != inicio);
@@ -108,11 +112,11 @@ public:
             return;
         }
 
-        strcpy(atual->palavra, wordCor); //corrige a palavra atual
+        atual->palavra = wordCor; //corrige a palavra atual
     }
 
     void moverDireita() {
-        if (inicio == nullptr) {
+        if (listaVazia()) {
             cout << "Lista vazia" << endl;
             return;
         }
@@ -120,30 +124,23 @@ public:
     }
 
     void moverEsquerda() {
-        if (inicio == nullptr) {
+        if (listaVazia()) {
             cout << "Lista vazia" << endl;
             return;
         }
         atual = atual->ant;
     }
 
-    void mostrarAtual() {
-        if (inicio == nullptr) {
-            cout << "[Lista vazia]" << endl;
-            return;
-        }
-        cout << "Palavra atual: " << atual->palavra << endl;
-    }
 };
 
 int main(void) {
     ListaCircular list;
     int opcao;
-    char palavra[20];
+    string palavra;
 
-    do {
+    while(opcao!= 7){
         cout << "\n////// Menu editor de texto /////" << endl;
-        cout << "1 - Inserir palavra" << endl;
+        cout << "1 - Inserir uma palavra" << endl;
         cout << "2 - Editar palavra atual" << endl;
         cout << "3 - Eliminar palavra atual" << endl;
         cout << "4 - Mover para a direita" << endl;
@@ -177,15 +174,14 @@ int main(void) {
                 list.imprimirFrase();
                 break;
             case 7:
-                cout << "Encerrando programa." << endl;
+                cout << "Encerrando editor." << endl;
                 break;
             default:
                 cout << "Opcao invalida!" << endl;
         }
 
         list.mostrarAtual();
-
-    } while (opcao != 7);
+    } 
 
     return 0;
 }
