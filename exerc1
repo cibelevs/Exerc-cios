@@ -1,0 +1,23 @@
+void listaPrimos(Nodo* inicio) {
+    Nodo* listaPrimos = nullptr;
+    Nodo* fimPrimos = nullptr;
+    Nodo* aux = inicio;
+
+    while (aux != nullptr) {
+        if (primo(aux->info)) {
+            // Cria um novo nó com a mesma informação
+            Nodo* novo = new Nodo();
+            novo->info = aux->info;
+            novo->prox = nullptr;
+
+            if (listaPrimos == nullptr) {
+                listaPrimos = novo;
+                fimPrimos = novo;
+            } else {
+                fimPrimos->prox = novo;
+                fimPrimos = novo;
+            }
+        }
+        aux = aux->prox;
+    }
+}
