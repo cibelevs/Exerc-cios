@@ -21,3 +21,26 @@ void listaPrimos(Nodo* inicio) {
         aux = aux->prox;
     }
 }
+
+void removerPares(Nodo*& inicio) {
+    Nodo* atual = inicio;
+    Nodo* anterior = nullptr;
+
+    while (atual != nullptr) {
+        if (atual->info % 2 == 0) {  // se for par
+            Nodo* temp = atual;
+            if (anterior == nullptr) {
+                // removendo o primeiro nó
+                inicio = atual->prox;
+                atual = inicio;
+            } else {
+                anterior->prox = atual->prox;
+                atual = atual->prox;
+            }
+            delete temp;  // libera memória
+        } else {
+            anterior = atual;
+            atual = atual->prox;
+        }
+    }
+}
