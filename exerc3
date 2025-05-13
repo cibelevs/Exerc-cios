@@ -1,0 +1,44 @@
+void ajustaLista(Nodo *inicio, int v) {
+    if (inicio == nullptr) {
+        return; // Empty list
+    }
+
+    Nodo *ant = nullptr;  // Predecessor of current node
+    Nodo *atual = inicio; // Current node being checked
+
+    while (atual != nullptr) {
+        if (atual->info == v) {
+            // Case 1: Remove predecessor (if exists)
+            if (ant != nullptr) {
+                Nodo *temp_ant = ant; // Node to delete (predecessor)
+                
+                // Update links to skip predecessor
+                if (ant == inicio) {
+                    inicio = atual; // New head if predecessor was head
+                } else {
+                    // Find the node before 'ant' to update its 'prox'
+                    Nodo *prev_ant = inicio;
+                    while (prev_ant->prox != ant) {
+                        prev_ant = prev_ant->prox;
+                    }
+                    prev_ant->prox = atual;
+                }
+                delete temp_ant; // Free predecessor
+            }
+
+            // Case 2: Remove successor (if exists)
+            if (atual->prox != nullptr) {
+                Nodo *temp_suc = atual->prox; // Node to delete (successor)
+                atual->prox = temp_suc->prox; // Skip successor
+                delete temp_suc; // Free successor
+            }
+
+            return; // Done after processing
+        }
+
+        ant = atual; // Move 'ant' to current node
+        atual = atual->prox; // Move to next node
+    }
+
+    // If 'v' not found, do nothing
+}
