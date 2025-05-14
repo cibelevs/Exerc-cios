@@ -7,50 +7,52 @@ struct Nodo{
 };
 
 
-void (Nodo * inicio){
+void suprimir (Nodo * inicio){
     Nodo * atual = inicio;
     if(inicio == nullptr){
         cout<<"Lista esta vazia"<<endl;
         return;
     }
     int c = 1;
+    bool visto = false;
 
     Nodo * listaComp = atual;
 
     while(atual  != nullptr){
         Nodo * ant = atual;
         Nodo * aux = atual->prox;
+
         while(aux != nullptr){
             if((aux->info) == (atual->info)){
                 c++;
             }
-            ant = aux;
+            ant = aux;                
             aux = aux -> prox;
         }
+        visto = true;
+        atual = atual -> prox;
+        atual = prox;
+    }
+
+    if(visto == true){
         Nodo * novo;
         Nodo * helper = nullptr;
         novo = new Nodo();
-        
 
         if(novo == nullptr){
             return;//erro ao alocar
         }
 
-
         novo->info = c;
 
         if(listaComp = atual){
             listaComp->prox = novo;
-            novo->prox = nullptr;
-            
         } else{
             helper->prox = atual;
             atual->prox = novo;
         }
-        
+        novo->prox = nullptr;
         helper = novo;
-
-        atual = atual -> prox;
-        atual = prox;
     }
+    
 }
