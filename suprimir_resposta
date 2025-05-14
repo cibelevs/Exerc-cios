@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+struct Nodo {
+    int info;
+    Nodo* prox;
+};
+
+// Função que cria nova lista com info e quantidade de ocorrências
+Nodo* suprimir(Nodo* inicio) {
+    if (inicio == nullptr) {
+        cout << "Lista está vazia" << endl;
+        return nullptr;
+    }
+
+    Nodo* resultado = nullptr;
+    Nodo* fimResultado = nullptr;
+    Nodo* atual = inicio;
+
+    while (atual != nullptr) {
+        int valor = atual->info;
+        int cont = 0;
+        Nodo* temp = inicio;
+
+        // Verifica se já processamos esse valor antes
+        bool jaProcessado = false;
+        Nodo* verificador = resultado;
+        while (verificador != nullptr) {
+            if (verificador->info == valor) {
+                jaProcessado = true;
+                break;
+            }
+            verificador = verificador->prox->prox; // Pula par (valor, contagem)
+        }
+
+        if (jaProcessado) {
+            atual = atual->prox;
+            continue;
+        }
+
+        // Conta quantas vezes o valor aparece
+        while (temp != nullptr) {
+            if (temp->info == valor)
+                cont++;
+            temp = temp->prox;
+        }
+
+        // Adiciona valor e contagem à nova lista
+        Nodo* novoValor = new Nodo{valor, nullptr};
+        Nodo* novaContagem = new Nodo{cont, nullptr};
+
+        if (resultado == nullptr) {
+            resultado = novoValor;
+        } else {
+            fimResultado->prox = novoValor;
+        }
+
+        novoValor->prox = novaContagem;
+        fimResultado = novaContagem;
+
+        atual = atual->prox;
+    }
+
+    return resultado;
+}
+
+// Função auxiliar para imprimir a lista
+void imprimirLista(Nodo* inicio) {
+    while (inicio != nullptr) {
+        cout << inicio->info << " ";
+        inicio = inicio->prox;
+    }
+    cout << endl;
+}
+
+// Exemplo de uso
+int main() {
+    // Criar lista: 1 -> 1 -> 2
+    Nodo* n1 = new Nodo{1, nullptr};
+    Nodo* n2 = new Nodo{1, nullptr};
+    Nodo* n3 = new Nodo{2, nullptr};
+    n1->prox = n2;
+    n2->prox = n3;
+
+    Nodo* resultado = suprimir(n1);
+    imprimirLista(resultado);  // Saída esperada: 1 2 2 1
+
+    return 0;
+}
