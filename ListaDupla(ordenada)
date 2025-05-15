@@ -40,7 +40,7 @@ class ListaDupla{
             atual = atual->prox;                               //  ou seja, vai ficar mais para o final da lista
         }
 
-        if(atual->prox == nullptr && (atual->info < novo->info)){ //se o ultimo elemento da lista for menor que o novo
+        if(atual->prox == nullptr){ //se o ultimo elemento da lista for menor que o novo
             atual->prox = novo;                                   // ou seja o novo vai para o FINAL dA LISTA
             novo->ant = atual;
             novo->prox = nullptr;
