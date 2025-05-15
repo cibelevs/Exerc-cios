@@ -92,7 +92,7 @@ class Lista{
         }
         else {
             //se o numero pedido estiver no meio da lista
-            anterior -> prox = atual;
+            anterior -> prox = atual -> prox;
         }
 
         delete atual;//deleta o atual (auxiliar)
