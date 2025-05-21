@@ -134,6 +134,7 @@ public:
             return;
         }
         //exibindo elementos...
+        cout<<"Exibindo elementos da lista..."<<endl;
         Nodo2* auxiliar = inicio;
         while (auxiliar != nullptr) {
             cout << auxiliar->info << " ";
