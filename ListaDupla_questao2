@@ -1,0 +1,211 @@
+struct Nodo2{
+    int info;
+    Nodo * ant;
+    Nodo * prox;
+}
+
+class ListaDupla{
+    
+    private:
+        Nodo2 * inicio;
+        Nodo2 * fim;
+
+    public:
+    
+    //construtor lista
+    ListaDupla (){
+        inicio = nullptr;
+        fim = nullptr;
+    }
+    
+    void inserir(int valor){
+        Nodo * novo;
+        novo = new Nodo();      
+
+        if (novo == nullptr){
+            cout<<"Erro ao alocar"<<endl; //verifica se da para alocar
+            return;
+        }
+        //insere valor no nodo
+        novo->info = valor;
+        
+        //se for no incio da lista
+        if(inicio == nullptr){ 
+            novo->ant = nullptr;         
+            novo->prox = nullptr;
+            novo = inicio;
+            fim = inicio;
+            fim = novo;
+            return;
+        } 
+        //outros casos
+        fim->prox = novo;
+        novo->ant = fim;
+        fim = novo;
+    }
+    
+    void retirar(int valor) {
+        if(inicio == nullptr){
+            cout<<"Lista vazia"<<endl;
+            return;
+        }
+        
+        Nodo2 * auxiliar = inicio;
+        
+        while(auxiliar!= nullptr){
+            //busca o valor para remover o Nodo2
+            if(auxiliar->info == valor){
+                Nodo2 * retira = aux;
+                if(aux->ant == nullptr){
+                    aux->prox->ant = nullptr
+                    inicio = aux->prox;
+                }else{
+                    if(aux->prox == nullptr){
+                        aux->ant->prox = nullptr;
+                        aux->ant = nullptr;
+                        fim = aux->ant;
+                    } else{
+                        aux->ant->prox = aux->prox;
+                        aux->prox->ant = aux->ant;
+                    }
+                }
+                delete retira;
+                return;
+            }
+            else 
+            aux = aux->prox;
+        }
+        
+        //caso valor não encontrado
+        if(aux == nullptr){
+            cout<<"Valor não encontrado na lista"<<endl;
+            return nullptr;
+        }
+        
+    }
+    
+    Nodo2 EliminaProximos(int valor, Nodo2 *& inicio){
+        if(inicio == nullptr){
+            cout<<"Lista Dupla Vazia"<<endl;
+            return nullptr;
+        }
+        
+        Nodo2 * aux = inicio;
+        
+        if(inicio->prox->prox == nullptr){
+            cout<<"Não é possivel fazer a alteração"<<endl;
+            return;
+        }
+        
+        
+        
+        
+        while(aux!= nullptr){
+            if(aux->info == valor){
+                //se for no inicio, retira só o sucessor
+                    Nodo2 * helper = aux;
+                if(aux->ant == nullptr){
+                    inicio->prox = aux->prox->prox;
+                    aux->prox->ant = inicio;
+                    return inicio;
+                } else{
+                    // se for só no final
+                    if()
+                    else {
+                        //se for o elemento do meio e só tiver 3 
+                        if()
+                        
+                        //para os outros casos
+                        else
+                    }
+                }
+                
+                
+            }
+            else{
+                aux = aux->prox;
+            }
+            
+        }
+        
+        //caso o valor não esteja na lista
+        if(aux == nullptr){
+            cout<<"Valor não encontrado na lista"<<endl;
+            return nullptr;
+        }
+        
+        
+    }
+    
+    void exibir(){
+         if(inicio == nullptr){
+            cout<<"Lista Dupla Vazia"<<endl;
+            return nullptr;
+        }
+        
+        Nodo * auxiliar;
+        //aponta para o primeiro elemento
+        auxiliar = inicio;
+
+        //enquanto auxiliar for diferente de nulo, ele irá imprimir elementos
+        while (auxiliar != nullptr){
+            cout<< auxiliar->info <<endl; //imprimir o elemento apontado em info
+            auxiliar = auxiliar -> prox;  // passa a apontar para a prox regiao
+        }
+        
+    }
+    
+    void menu(){
+        //função para imprimir o menu
+        cout<<"///////MENU////////"<<endl;
+        cout<<"Insira 1 para inserir"<<endl;
+        cout<<"Insira 2 para retirar um Nodo"<<endl;
+        cout<<"Insira 3 para retirar Nodos proximos"<<endl;
+        cout<<"Insira 4 para exibir lista"<<endl;
+        cout<<"Insira 5 para sair"<<endl;
+    }
+};
+
+int main(){
+    ListaDupla lista;
+    lista.menu();
+    int opcao;
+    cin<<opcao;
+    
+    do{
+        lista.menu();
+        switch(opcao){
+            case 1:
+                int valor = 0;
+                cout<<"Insira valor para inserir"<<endl;
+                cin<<valor;
+                lista.inserir(valor);
+                break;
+            case 2: 
+                int valor = 0;
+                cout<<"Insira valor para retirar (o Nodo)"<<endl;
+                cin<<valor;
+                lista.retirar(valor);
+                break;
+            case 3:
+                int valor = 0;
+                cout<<"Insira valor para retirar (os Nodos próximos)"<<endl;
+                cin<<valor;
+                lista.EliminaProximos(valor);
+                break;
+            case 4:
+                cout<<"Exibindo a lista..."<<endl;
+                lista.Exibindo();
+                break;
+            default:
+                cout<<"operação inválida"<<endl;
+                break;
+        }
+        
+    } while(opcao != 5)
+    
+    cout<<"Operação Finalizada"<<endl;
+    
+    
+    return 0;
+}
