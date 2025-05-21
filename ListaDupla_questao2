@@ -31,17 +31,18 @@ class ListaDupla{
         
         //se for no incio da lista
         if(inicio == nullptr){ 
-            novo->ant = nullptr;         
-            novo->prox = nullptr;
-            novo = inicio;
-            fim = inicio;
+            inicio = novo;
             fim = novo;
             return;
         } 
+        
         //outros casos
         fim->prox = novo;
         novo->ant = fim;
         fim = novo;
+        
+        
+       
     }
     
     void retirar(int valor) {
@@ -56,15 +57,21 @@ class ListaDupla{
             //busca o valor para remover o Nodo2
             if(auxiliar->info == valor){
                 Nodo2 * retira = aux;
+                //primeiro elemento
                 if(aux->ant == nullptr){
-                    aux->prox->ant = nullptr
                     inicio = aux->prox;
+                    if(inicio != nullptr){ 
+                        inicio->ant == nullptr;
+                        
+                    }
                 }else{
+                    //ultimo elemento
                     if(aux->prox == nullptr){
-                        aux->ant->prox = nullptr;
-                        aux->ant = nullptr;
                         fim = aux->ant;
-                    } else{
+                        fim->prox = nullptr;
+                    } 
+                    //outros casos
+                    else{
                         aux->ant->prox = aux->prox;
                         aux->prox->ant = aux->ant;
                     }
@@ -72,7 +79,6 @@ class ListaDupla{
                 delete retira;
                 return;
             }
-            else 
             aux = aux->prox;
         }
         
@@ -84,48 +90,58 @@ class ListaDupla{
         
     }
     
-    Nodo2 EliminaProximos(int valor){
+    void EliminaProximos(int valor){
         if(inicio == nullptr){
             cout<<"Lista Dupla Vazia"<<endl;
-            return nullptr;
+            return;
         }
         
         Nodo2 * aux = inicio;
         
+        //se só tiver um elemento
+        if(inicio->prox == nullptr){
+            cout<<"Não é possivel fazer a alteração"<<endl;
+            return;
+        }
+        
+        // se só tiver dois elementos
         if(inicio->prox->prox == nullptr){
             cout<<"Não é possivel fazer a alteração"<<endl;
             return;
         }
         
-        
-        
-        
-        while(aux!= nullptr){
+        while(aux != nullptr){
+            //busca pelo numero
             if(aux->info == valor){
-                //se for no inicio, retira só o sucessor
-                    Nodo2 * helper = aux;
-                if(aux->ant == nullptr){
-                    inicio->prox = aux->prox->prox;
-                    aux->prox->ant = inicio;
-                    return inicio;
-                } else{
-                    // se for só no final
-                    if()
-                    else {
-                        //se for o elemento do meio e só tiver 3 
-                        if()
-                        
-                        //para os outros casos
-                        else
+                // caso não for no inicio da lista
+                if(aux->ant != nullptr){
+                    Nodo2 * anterior = aux->ant;
+                    if(anterior->ant != nullptr){
+                        anterior->ant->prox = aux;
+                        aux->ant = anterior->ant;
+                    } else {
+                        //caso inicio
+                        inicio = aux;
+                        aux->ant = nullptr;
                     }
+                    delete anterior;
                 }
-                
-                
+                //caso for no fim da lista 
+                if(aux->prox != nullptr){
+                    Nodo2 * sucessor = aux->prox;
+                    if(sucessor->prox != nullptr){
+                        sucessor->prox->ant = aux ;
+                        aux->prox = sucessor->prox;
+                    } else{
+                        //caso fim
+                        aux->prox = nullptr;
+                        fim = aux;
+                    }
+                    delete sucessor;
+                }
+                return;
             }
-            else{
-                aux = aux->prox;
-            }
-            
+            aux = aux->prox;
         }
         
         //caso o valor não esteja na lista
@@ -133,8 +149,6 @@ class ListaDupla{
             cout<<"Valor não encontrado na lista"<<endl;
             return nullptr;
         }
-        
-        
     }
     
     void exibir(){
@@ -157,55 +171,60 @@ class ListaDupla{
     
     void menu(){
         //função para imprimir o menu
-        cout<<"///////MENU////////"<<endl;
+        cout<<"\n///////MENU////////"<<endl;
         cout<<"Insira 1 para inserir"<<endl;
         cout<<"Insira 2 para retirar um Nodo"<<endl;
         cout<<"Insira 3 para retirar Nodos proximos"<<endl;
         cout<<"Insira 4 para exibir lista"<<endl;
         cout<<"Insira 5 para sair"<<endl;
+        cout<<"Digite uma opcao: ";
     }
 };
 
 int main(){
     ListaDupla lista;
-    lista.menu();
-    int opcao;
-    cin<<opcao;
+    int opcao = 0;
     
     do{
-        lista.menu();
+        lista.menu();  
+        cin<<opcao;
         switch(opcao){
-            case 1:
+            case 1: {
                 int valor = 0;
                 cout<<"Insira valor para inserir"<<endl;
-                cin<<valor;
+                cin>>valor;
                 lista.inserir(valor);
                 break;
-            case 2: 
+            }
+            case 2: {
                 int valor = 0;
                 cout<<"Insira valor para retirar (o Nodo)"<<endl;
-                cin<<valor;
+                cin>>valor;
                 lista.retirar(valor);
                 break;
-            case 3:
+            }
+            case 3: {
                 int valor = 0;
                 cout<<"Insira valor para retirar (os Nodos próximos)"<<endl;
-                cin<<valor;
+                cin>>valor;
                 lista.EliminaProximos(valor);
                 break;
+            }
             case 4:
                 cout<<"Exibindo a lista..."<<endl;
                 lista.Exibindo();
                 break;
+            case 5:
+                cout<<"Operação Finalizada"<<endl;
+                break;
             default:
-                cout<<"operação inválida"<<endl;
+                cout<<"Operação inválida"<<endl;
                 break;
         }
         
     } while(opcao != 5)
     
-    cout<<"Operação Finalizada"<<endl;
-    
+
     
     return 0;
 }
