@@ -143,13 +143,14 @@ public:
     }
 
     void menu() {
-        cout << "\n/////// MENU ////////" << endl;
-        cout << "1 - Inserir" << endl;
-        cout << "2 - Retirar um Nodo" << endl;
-        cout << "3 - Eliminar Nodos próximos" << endl;
-        cout << "4 - Exibir lista" << endl;
-        cout << "5 - Sair" << endl;
-        cout << "Digite uma opção: ";
+        //função para imprimir o menu
+        cout<<"\n///////MENU////////"<<endl;
+        cout<<"Insira 1 para inserir"<<endl;
+        cout<<"Insira 2 para retirar um Nodo"<<endl;
+        cout<<"Insira 3 para retirar Nodos proximos"<<endl;
+        cout<<"Insira 4 para exibir lista"<<endl;
+        cout<<"Insira 5 para sair"<<endl;
+        cout<<"Digite uma opcao: ";
     }
 };
 
