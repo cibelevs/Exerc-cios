@@ -84,7 +84,7 @@ class ListaDupla{
         
     }
     
-    Nodo2 EliminaProximos(int valor, Nodo2 *& inicio){
+    Nodo2 EliminaProximos(int valor){
         if(inicio == nullptr){
             cout<<"Lista Dupla Vazia"<<endl;
             return nullptr;
