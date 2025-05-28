@@ -122,5 +122,17 @@ class Tree{
             pai->esq = atual;
         }
     }
+
+void emOrdem(Nodo * raiz){
+        if(raiz == nullptr){
+            cout<<"Girl, the tree is empty!"<<endl;
+            return;
+        }
+        //imprimindo em ordem = esq , dir , raiz
+        emOrdem(raiz->esq);
+        cout<<raiz->info<<endl;
+        emOrdem(raiz->dir);
+        
+    }
     
 };
