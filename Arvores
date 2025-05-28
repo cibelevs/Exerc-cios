@@ -1,0 +1,63 @@
+//criando uma arvore 28/05
+#include<iostream>
+using namespace std;
+
+struct Nodo{
+    int info;                                //         Nodo          //  
+    struct Nodo * esq , * dir;               // * esq  || int || * dir //
+};
+
+
+class Tree{
+    public:
+    Nodo * raiz; //deixando a raiz como atributo publico
+    
+    Tree(){
+        raiz = nullptr; //inicializando com nullptr
+    }
+    
+    //a função retorna um ponteiro, pois o "link" esta no retorno
+    //primeiro elemento da arvore
+    Nodo * inserir (Nodo * raiz, int valor){
+        if(raiz == nullptr){
+            raiz = new Nodo(); //criando uma raiz
+            if(raiz == nullptr){
+                //verifica alocação
+                cout<<"Erro ao alocar o Nodo"<<endl;
+                return nullptr;
+            }
+            //raiz recebe o valor
+            raiz->info = valor;
+            //ponteiros da direita e esquerda recebem nullptr
+            raiz->esq = nullptr;
+            raiz->dir = nullptr;
+            
+            //retorna a raiz
+            return raiz;
+        }
+        //não precisa do else já que tem o return
+        // e quando a raiz não for nula? Perguntamos para que lado vamos
+        
+        //se o valor for maior que a raiz
+        if(valor > (raiz->info)){
+            //preciso chamar a função pela direita
+            raiz->dir = inserir(raiz->dir, valor);
+            //ela retorna para a raiz direita! 
+        } else{
+            //se for menor que a raiz
+            if(valor < (raiz->info)){
+                //preciso chamar função pela esquerda
+                raiz->esquerda = inserir(raiz->esq, valor);
+                //ela retorna para a raiz esquerda! 
+            } 
+            else{
+                //se os valores forem iguais 
+                cout<<"Numero repetido"<<endl;
+            }
+            return raiz;
+        }
+ 
+        
+    }
+    
+};
