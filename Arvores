@@ -125,14 +125,16 @@ class Tree{
 
 void emOrdem(Nodo * raiz){
         if(raiz == nullptr){
-            cout<<"Girl, the tree is empty!"<<endl;
-            return;
+            return; //condição de parada!
         }
         //imprimindo em ordem = esq , dir , raiz
-        emOrdem(raiz->esq);
+        emOrdem(raiz->esq); //recursão!
+        //chama a própria função, até achar menor elemento
         cout<<raiz->info<<endl;
+        //imprime o menor 
         emOrdem(raiz->dir);
-        
+        //chama a própria função, até achar maior elemento
+        //passa para o prox (ao lado direito)
     }
     
 };
