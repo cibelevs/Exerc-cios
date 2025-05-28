@@ -56,8 +56,71 @@ class Tree{
             }
             return raiz;
         }
- 
+    }
+
+ void inserirSemRecursao (Nodo * raiz, int num){
         
+        if(raiz == nullptr){
+            raiz = new Nodo();
+            raiz = new Nodo(); //criando uma raiz
+            if(raiz == nullptr){
+                //verifica alocação
+                cout<<"Erro ao alocar o Nodo"<<endl;
+                return;
+            }
+            //raiz recebe o valor
+            raiz->info = num;
+            //ponteiros da direita e esquerda recebem nullptr
+            raiz->esq = nullptr;
+            raiz->dir = nullptr;
+            return;
+        }
+        
+        //criando dois ponteiros auxiliares
+        Nodo * atual = nullptr;
+        Nodo * pai = nullptr;
+        atual = raiz;
+        
+        //enquanto "atual" for direfente de nullptr        
+        while(atual != nullptr){
+            pai = atual; // pai vai salvar o local para inseirir
+            //perguntar sobre o valor para saber como mecher o atual
+            if(num > (atual->info)){
+                //se for maior
+                atual = atual->dir;
+            }
+            else{
+                //se for menor
+                if(num < (atual->info)){
+                    atual = atual->esq;
+                }
+                // se os valores forem iguais
+                else{
+                    cout<<"Valor Repetido"<<endl;
+                    return;
+                }
+            }
+        } //saindo daqui, já sei onde devo colocar o novo Valor
+        
+        atual = new Nodo();
+        if (atual == nullptr){
+            cout<<"Erro"<<endl;
+            return;
+        }
+        
+        //preenchendo...
+        atual->info = num;
+        atual->esq = nullptr;
+        atual->dir = nullptr;
+        
+        if(num > (pai->info)){
+            //se for maior que o local "pai", insere na direita
+            pai->dir = atual;
+        } 
+        else {
+            //se for menor que o local "pai", insere na esquerda
+            pai->esq = atual;
+        }
     }
     
 };
