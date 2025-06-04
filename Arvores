@@ -136,5 +136,22 @@ void emOrdem(Nodo * raiz){
         //chama a própria função, até achar maior elemento
         //passa para o prox (ao lado direito)
     }
+
+ int contarFolhas(Nodo *raiz) {
+        if (raiz == nullptr) return 0;
+        if (raiz->esq == nullptr && raiz->dir == nullptr) return 1;
+        return contarFolhas(raiz->esq) + contarFolhas(raiz->dir);
+    }
+
+    bool estrita(Nodo *raiz) {
+        if (raiz == nullptr) return true;
+
+        if ((raiz->esq == nullptr && raiz->dir != nullptr) ||
+            (raiz->esq != nullptr && raiz->dir == nullptr)) {
+            return false;
+        }
+
+        return estrita(raiz->esq) && estrita(raiz->dir);
+    }
     
 };
