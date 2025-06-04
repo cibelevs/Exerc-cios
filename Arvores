@@ -47,15 +47,15 @@ class Tree{
             //se for menor que a raiz
             if(valor < (raiz->info)){
                 //preciso chamar função pela esquerda
-                raiz->esquerda = inserir(raiz->esq, valor);
+                raiz->esq = inserir(raiz->esq, valor);
                 //ela retorna para a raiz esquerda! 
             } 
             else{
                 //se os valores forem iguais 
                 cout<<"Numero repetido"<<endl;
             }
-            return raiz;
         }
+        return raiz;
     }
 
  void inserirSemRecursao (Nodo * raiz, int num){
@@ -136,22 +136,113 @@ void emOrdem(Nodo * raiz){
         //chama a própria função, até achar maior elemento
         //passa para o prox (ao lado direito)
     }
-
- int contarFolhas(Nodo *raiz) {
-        if (raiz == nullptr) return 0;
-        if (raiz->esq == nullptr && raiz->dir == nullptr) return 1;
-        return contarFolhas(raiz->esq) + contarFolhas(raiz->dir);
-    }
-
-    bool estrita(Nodo *raiz) {
-        if (raiz == nullptr) return true;
-
-        if ((raiz->esq == nullptr && raiz->dir != nullptr) ||
-            (raiz->esq != nullptr && raiz->dir == nullptr)) {
-            return false;
+    
+    //contando folhas da arvore 
+    int contarFolhas(Nodo * raiz){
+        if(raiz == nullptr){
+            return 0;
         }
-
-        return estrita(raiz->esq) && estrita(raiz->dir);
+        if(raiz->esq == nullptr && ! raiz->dir){
+            return 1;
+        }
+        return (contarFolhas(raiz->esq) + contarFolhas(raiz->dir));
+        
+        
     }
     
+    bool isBinary(Nodo * raiz){
+        if(raiz == nullptr){
+            return true;
+        }
+        if((raiz->esq == nullptr && raiz->dir == nullptr) || (raiz->esq != nullptr && raiz->dir != nullptr)){
+            return (isBinary(raiz->esq) * isBinary(raiz->dir));
+        }
+        else 
+        return false;
+    }
+    
+    Nodo * retirar (Nodo *raiz, int n){
+        Nodo * aux =  nullptr;
+        if(raiz == nullptr){
+            return raiz;
+        }
+        //pergunta se é maior ou menor que a raiz primeiro
+        if(n > raiz->info ){
+            raiz->dir = retirar(raiz->dir, n); // vai buscando na arvore pela direita
+        } else {
+            if(n < raiz->info){
+                raiz->esq = retirar(raiz->esq, n); // vai buscando na arvore pela esquerda
+            }
+            else {
+                cout<<"Valor encontrado"<<endl;
+                //pergunta se tem uma raiz solta (nesse caso é a esquerda) 
+                //obs : se as duas forem nulo, vai eliminar da mesma forma! não precisa de outro if 
+
+                if(raiz->esq == nullptr){
+                    aux = raiz;
+                    raiz = raiz->dir;
+                    delete aux;
+                    return raiz; // link com a arvore "pai" acima acontece aqui
+                }
+                else {
+                    // a mesma pergunta só que pela esquerda
+                    if(raiz->dir == nullptr){
+                        aux = raiz;
+                        raiz = raiz->esq;
+                        delete aux;
+                        return raiz;  
+                    }
+                    else {
+                        raiz -> dir = substituir(raiz,raiz->dir); //Criando função auxiliar para substituir
+                        //raiz ->dir vai ser o o sucessor na função recursiva
+                        
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        cout<<"Valor não encontrado na arvore"<<endl;
+        return raiz;
+    }
+    
+    
+    Nodo* substituir(Nodo *raiz, Nodo *sucessor){
+        //sucessor tem que comprir 1 condição, a raiz que aponta a esquerda deve ser nula!
+        if(sucessor->esq == nullptr){
+            return nullptr;
+        }
+        sucessor->esq = substituir(sucessor, sucessor->esq); //busca recursiva
+        raiz->info = sucessor->info; // substituindo  
+        
+        sucesssor = sucessor -> dir;
+        delete aux;
+    }
+    
+    
+    
+    
 };
+
+int main() {
+Tree minhaArvore;
+ // Teste com insercao recursiva
+ minhaArvore.raiz = minhaArvore.inserir(minhaArvore.raiz, 10);
+ minhaArvore.raiz = minhaArvore.inserir(minhaArvore.raiz, 5);
+ minhaArvore.raiz = minhaArvore.inserir(minhaArvore.raiz, 15);
+ minhaArvore.raiz = minhaArvore.inserir(minhaArvore.raiz, 3);
+
+ std::cout << "\nImpressao em ordem (Recursiva):\n";
+ minhaArvore.emOrdem(minhaArvore.raiz);
+
+ // Teste de isBinary
+ std::cout << "\nA estrutura atual é uma arvore binaria? ";
+ if (minhaArvore.isBinary(minhaArvore.raiz))
+ std::cout << "Sim\n";
+ else
+ std::cout << "Nao\n";
+ return 0;
+}
+
+
