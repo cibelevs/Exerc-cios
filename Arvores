@@ -208,20 +208,36 @@ void emOrdem(Nodo * raiz){
     }
     
     
-    Nodo* substituir(Nodo *raiz, Nodo *sucessor){
-        //sucessor tem que comprir 1 condição, a raiz que aponta a esquerda deve ser nula!
-        if(sucessor->esq == nullptr){
-            return nullptr;
-        }
-        sucessor->esq = substituir(sucessor, sucessor->esq); //busca recursiva
-        raiz->info = sucessor->info; // substituindo  
-        
-        sucesssor = sucessor -> dir;
-        delete aux;
+ Nodo* substituir (Nodo * raiz, Nodo * sucessor){
+    Nodo * aux = nullptr;
+    if (sucessor->esq == nullptr){
+        raiz->info = sucessor->info;
+        aux = sucessor;
+        Nodo * temp = sucessor->dir;
+        delete sucessor;
+        return temp;
+    } else {
+        sucessor->esq = substituir(raiz, sucessor->esq);
+        return sucessor;
     }
+
+}
     
+
+ int altura (Nodo * raiz){
+    if(raiz == nullptr){
+        return - 1;
+    }
+    int e = altura(raiz->esq);
+    int d = altura(raiz->dir);
+    if(e > d)
+        return e + 1;
+    else 
+        return d + 1;
     
-    
+}
+
+
     
 };
 
